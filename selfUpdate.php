@@ -1,0 +1,2 @@
+<?
+passthru("git pull");
