@@ -8,7 +8,7 @@ define(function(require){
 
     var cube = new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
-        new THREE.MeshBasicMaterial({color: 0xFF00FF})
+        new THREE.MeshBasicMaterial({color: 0xFF88FF})
     );
 
     scene.add(cube);
