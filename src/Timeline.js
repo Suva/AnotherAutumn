@@ -1,5 +1,6 @@
 define(function(require) {
     var BasicScene               = require("scene/BasicScene");
+    var CCLogoScene              = require("scene/CCLogoScene");
 
     var renderScene;
 
@@ -9,7 +10,8 @@ define(function(require) {
 
 
     var allScenes = [
-        BasicScene
+        BasicScene,
+        CCLogoScene
     ];
 
     function initRenderScene(scenes){
@@ -62,7 +64,7 @@ define(function(require) {
             });
 
             // TODO: REMOVE THIS
-            currentScene = BasicScene;
+            currentScene = CCLogoScene;
             renderScene = renderScenes[getSceneId(currentScene)];
         }
     };
