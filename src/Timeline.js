@@ -44,7 +44,7 @@ define(function(require) {
             if(typeof(event.pattern) == 'undefined') return;
             switch(event.pattern){
                 case 0:
-                    currentScene = BasicScene;
+                    currentScene = CCLogoScene;
                     break;
             }
 
@@ -63,9 +63,6 @@ define(function(require) {
                 return initRenderScene([scene])
             });
 
-            // TODO: REMOVE THIS
-            currentScene = CCLogoScene;
-            renderScene = renderScenes[getSceneId(currentScene)];
         }
     };
 

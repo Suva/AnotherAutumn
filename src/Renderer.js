@@ -98,13 +98,16 @@ define(function(require){
         var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
         effectBloom = new THREE.BloomPass(0.2);
         var effectVignette = new THREE.ShaderPass(THREE.VignetteShader);
-        effectVignette.uniforms.darkness.value = 1;
         effectPass = new THREE.ShaderPass(EffectShader);
+        blurPass = new THREE.ShaderPass(THREE.TriangleBlurShader);
+
+        effectVignette.uniforms.darkness.value = 1;
         effectCopy.renderToScreen = true;
 
         var composer = new THREE.EffectComposer(renderer);
         composer.addPass(renderModel);
         composer.addPass(effectBloom);
+        composer.addPass(blurPass);
         composer.addPass(effectVignette);
         composer.addPass(effectPass);
         composer.addPass(effectCopy);

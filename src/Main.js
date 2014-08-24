@@ -1,11 +1,11 @@
-require(["Loader", "Renderer", "TimeSourceDebug", "Timeline"], function(Loader, Renderer, TimeSourceDebug, Timeline){
+require(["Loader", "Renderer", "MusicPlayer", "Timeline"], function(Loader, Renderer, TimeSource, Timeline){
     Loader.onLoaded(function(){
         Renderer.init();
         Timeline.setRenderer(Renderer.renderer);
         Renderer.setTimeLine(Timeline);
-        Renderer.setTimeSource(TimeSourceDebug);
+        Renderer.setTimeSource(TimeSource);
         // Renderer.prerender();
-        TimeSourceDebug.start(getPattern());
+        TimeSource.start(getPattern());
         Renderer.start();
     });
 
