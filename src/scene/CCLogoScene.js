@@ -4,10 +4,12 @@ define(function(require){
     var Timer = require("Timer");
     var Ease = require("Ease");
 
+	 const CAMERA_DISTANCE = 11;
+
     var scene = new THREE.Object3D();
     var camera = new THREE.PerspectiveCamera(75, 16 / 9, 0.1, 5000);
 
-    camera.position.set(0, 0, 5.5);
+    camera.position.set(0, 0, CAMERA_DISTANCE);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     var tex = THREE.ImageUtils.loadTexture("images/cc-logo-gritty.jpg");
@@ -50,7 +52,7 @@ define(function(require){
                 blurPass.uniforms.delta.value.x = blurriness;
                 blurPass.uniforms.delta.value.y = blurriness;
             }
-            camera.position.z =  5.5 - time * 0.1;
+            camera.position.z = CAMERA_DISTANCE - time * 0.2;
             wiggle(camera);
 
 

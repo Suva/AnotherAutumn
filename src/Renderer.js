@@ -1,5 +1,6 @@
 define(function(require){
     var EffectShader = require("EffectShader");
+    var AberrationShader = require("AberrationShader");
     var TimeLine = null;
 
     var renderer = new THREE.WebGLRenderer( {antialias: false, alpha:true} );
@@ -91,6 +92,8 @@ define(function(require){
         composer.setSize(width, height);
 
         renderer.setSize(width, height);
+		  aberrationPass.uniforms.resolution.value.x = width;
+		  aberrationPass.uniforms.resolution.value.y = height;
         $("canvas").css("margin-top", position + "px");
     }
 
@@ -99,6 +102,7 @@ define(function(require){
         effectBloom = new THREE.BloomPass(0.2);
         var effectVignette = new THREE.ShaderPass(THREE.VignetteShader);
         effectPass = new THREE.ShaderPass(EffectShader);
+        aberrationPass = new THREE.ShaderPass(AberrationShader, "tInput");
         blurPass = new THREE.ShaderPass(THREE.TriangleBlurShader);
 
         effectVignette.uniforms.darkness.value = 1;
@@ -108,6 +112,7 @@ define(function(require){
         composer.addPass(renderModel);
         composer.addPass(effectBloom);
         composer.addPass(blurPass);
+		  composer.addPass(aberrationPass);
         composer.addPass(effectVignette);
         composer.addPass(effectPass);
         composer.addPass(effectCopy);
