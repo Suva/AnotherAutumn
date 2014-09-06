@@ -30,7 +30,7 @@ class SimpleHandler(sax.ContentHandler):
     def __init__(self):
         self.state = ""
         self.bpm = 0
-        self.lbp = 0
+        self.lbp = 4
         self.seq = []
         self.patterns = []
         self.pattern = None

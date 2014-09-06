@@ -13,6 +13,7 @@ define(function(require){
     var scene;
     var timeSource;
     var framenum = 0;
+    var switchTime = 0;
 
     return {
         init:function(){
@@ -45,7 +46,7 @@ define(function(require){
                 }
 
                 dispatchEvents(events, scene);
-                scene.render(timeSource.getTime());
+                scene.render(timeSource.getTime() - switchTime);
 
                 if(!frameUrl)
                     requestAnimationFrame(render);
@@ -69,6 +70,9 @@ define(function(require){
         },
         saveFramesTo: function(url){
             frameUrl = url;
+        },
+        resetSwitchTime: function(){
+            switchTime = timeSource.getTime();
         },
         renderer: renderer
     };

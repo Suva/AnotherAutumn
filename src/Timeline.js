@@ -1,6 +1,12 @@
 define(function(require) {
+    var Renderer                 = require("Renderer");
     var BasicScene               = require("scene/BasicScene");
     var CCLogoScene              = require("scene/CCLogoScene");
+    var TitleScene               = require("scene/TitleScene");
+    var LonelyTreeScene          = require("scene/LonelyTree");
+
+
+
 
     var renderScene;
 
@@ -11,7 +17,9 @@ define(function(require) {
 
     var allScenes = [
         BasicScene,
-        CCLogoScene
+        CCLogoScene,
+        TitleScene,
+        LonelyTreeScene
     ];
 
     function initRenderScene(scenes){
@@ -46,6 +54,15 @@ define(function(require) {
                 case 0:
                     currentScene = CCLogoScene;
                     break;
+                case 1:
+                    currentScene = TitleScene;
+                    break;
+                case 2:
+                    currentScene = LonelyTreeScene;
+                    break;
+                case 3:
+                    currentScene = TitleScene;
+
             }
 
             renderScene = renderScenes[getSceneId(currentScene)];
@@ -55,6 +72,7 @@ define(function(require) {
                     currentScene.init({renderScene: renderScene, renderer: renderer});
                 }
                 oldScene = currentScene;
+                Renderer.resetSwitchTime();
             }
         },
         setRenderer: function(r){
