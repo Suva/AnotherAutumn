@@ -1,5 +1,7 @@
 define(function(require){
 
+    var Wiggle = require("Wiggle");
+
     var scene = new THREE.Object3D();
     var camera = new THREE.PerspectiveCamera(50, 16 / 9, 0.1, 5000);
 
@@ -17,9 +19,6 @@ define(function(require){
         });
     });
 
-
-
-
     var origin = new THREE.Vector3();
 
     return {
@@ -27,8 +26,7 @@ define(function(require){
         camera: camera,
         render: function(time){
             camera.position.x = -1 + time * 0.2;
-            camera.lookAt(origin)
-
+            camera.lookAt(origin);
         },
         onEvent: function(event) {
 
