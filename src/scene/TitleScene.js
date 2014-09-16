@@ -13,6 +13,8 @@ define(function(require){
     camera.position.set(0, 0, cameraPosition);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
+    var titleOverlay = THREE.ImageUtils.loadTexture("images/title-overlay.png");
+
     var sky = THREE.ImageUtils.loadTexture("images/l04.jpg");
     var fgTextures = [
         THREE.ImageUtils.loadTexture("images/l01.png"),
@@ -48,53 +50,12 @@ define(function(require){
         fgPlane.add(plane);
     });
 
-    var logoPlaneBase = new THREE.Mesh(
-        new THREE.PlaneGeometry(10.43, 1.42),
-        new THREE.MeshBasicMaterial({
-            map: logo,
-            transparent: true,
-            depthWrite: false,
-            depthTest: false
-        })
-    );
-
-    var logoFlash = [];
-    logoFlash[0] = new THREE.Mesh(
-        new THREE.PlaneGeometry(10.43, 1.42),
-        new THREE.MeshBasicMaterial({
-            map: logo,
-            transparent: true,
-            depthWrite: false,
-            depthTest: false
-        })
-    );
-
-    logoFlash[1] = new THREE.Mesh(
-        new THREE.PlaneGeometry(10.43, 1.42),
-        new THREE.MeshBasicMaterial({
-            map: logo,
-            transparent: true,
-            depthWrite: false,
-            depthTest: false
-        })
-    );
-
-    var logoPlane = new THREE.Object3D();
-    logoPlane.add(logoPlaneBase);
-    logoPlane.add(logoFlash[0]);
-    logoPlane.add(logoFlash[1]);
 
     scene.add(plane);
     scene.add(fgPlane);
-    scene.add(logoPlane);
 
     plane.scale.multiplyScalar(1.5);
     plane.position.z = -5;
-
-    logoPlane.scale.multiplyScalar(0.4);
-    logoPlane.position.z = logoPosition;
-    logoPlane.position.y = 0.5;
-    logoPlane.position.x = 2;
 
     var wiggle = Wiggle(0.02, 0.006);
     var r = Random(11);
@@ -126,18 +87,13 @@ define(function(require){
             } else {
                 blurriness = Math.max(0, blurriness - passed * 0.1);
                 effectPass.uniforms.brightness.value = Math.max(0, effectPass.uniforms.brightness.value - passed * 0.5);
-
                 blurPass.uniforms.delta.value.x = blurriness;
                 blurPass.uniforms.delta.value.y = blurriness;
             }
+
+
             camera.position.z = cameraPosition - time * 0.1;
             camera.position.x = -0.5 + time * 0.2;
-            logoPlane.position.z = logoPosition + time * 0.1;
-
-            logoFlash[flashNumber].position.z = (time - logoFlashTime) * 26;
-
-            logoFlash[flashNumber].position.y = -(time - logoFlashTime) * 3;
-            logoFlash[flashNumber].material.opacity = Math.max(0.3 - (time - logoFlashTime) * 0.9, 0)
 
             wiggle(camera);
 
@@ -150,7 +106,6 @@ define(function(require){
             }
         },
         init: function(args){
-
         }
     };
 });

@@ -1,22 +1,14 @@
 define(function(require) {
     var Renderer                 = require("Renderer");
-    var BasicScene               = require("scene/BasicScene");
     var CCLogoScene              = require("scene/CCLogoScene");
     var TitleScene               = require("scene/TitleScene");
     var LonelyTreeScene          = require("scene/LonelyTree");
 
-
-
-
     var renderScene;
-
     var renderer = null;
-
     var currentScene;
 
-
     var allScenes = [
-        BasicScene,
         CCLogoScene,
         TitleScene,
         LonelyTreeScene

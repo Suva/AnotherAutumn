@@ -8,6 +8,7 @@ define(function(require){
     camera.position.set(0, 0, 14);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
+    var musicOverlay = THREE.ImageUtils.loadTexture("images/music-overlay.png");
 
     var jsonLoader = new THREE.JSONLoader();
     jsonLoader.load("models/lonely-tree.js", function(geometry, materials) {

@@ -1,11 +1,16 @@
 define(function(require){
     var EffectShader = require("EffectShader");
     var AberrationShader = require("AberrationShader");
+    var OverlayShader = require("OverlayShader");
+    var OverlayScene = require("scene/OverlayScene");
+
     var TimeLine = null;
 
     var renderer = new THREE.WebGLRenderer( {antialias: false, alpha:true} );
 
     var renderModel = new THREE.RenderPass();
+
+    var renderTarget = null;
 
     var composer = InitializeComposer();
     var frameUrl = null;
@@ -46,6 +51,7 @@ define(function(require){
                 }
 
                 dispatchEvents(events, scene);
+                dispatchEvents(events, OverlayScene);
                 scene.render(timeSource.getTime() - switchTime);
 
                 if(!frameUrl)
@@ -54,7 +60,11 @@ define(function(require){
                 renderModel.scene = renderScene;
                 renderModel.camera = scene.camera;
 
-                effectPass.uniforms.globalBrightness.value = Math.random() * 0.05 + 0.95;
+                OverlayScene.render(timeSource.getTime());
+                renderer.render(OverlayScene.scene, OverlayScene.camera, renderTarget);
+                overlayPass.uniforms.tOverlay.value = renderTarget;
+
+                effectPass.uniforms.globalBrightness.value = Math.random() * 0.01 + 0.99;
                 composer.render();
 
                 if(frameUrl){
@@ -93,6 +103,8 @@ define(function(require){
             scene.sceneObject.camera.updateProjectionMatrix();
         }
 
+        renderTarget = new THREE.WebGLRenderTarget(width, height);
+
         composer.setSize(width, height);
 
         renderer.setSize(width, height);
@@ -107,6 +119,8 @@ define(function(require){
         var effectVignette = new THREE.ShaderPass(THREE.VignetteShader);
         effectPass = new THREE.ShaderPass(EffectShader);
         aberrationPass = new THREE.ShaderPass(AberrationShader, "tInput");
+        overlayPass = new THREE.ShaderPass(OverlayShader, "tInput");
+
         blurPass = new THREE.ShaderPass(THREE.TriangleBlurShader);
 
         effectVignette.uniforms.darkness.value = 1;
@@ -114,9 +128,10 @@ define(function(require){
 
         var composer = new THREE.EffectComposer(renderer);
         composer.addPass(renderModel);
+        composer.addPass(overlayPass);
         composer.addPass(effectBloom);
         composer.addPass(blurPass);
-		  composer.addPass(aberrationPass);
+		composer.addPass(aberrationPass);
         composer.addPass(effectVignette);
         composer.addPass(effectPass);
         composer.addPass(effectCopy);

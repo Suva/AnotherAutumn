@@ -30,7 +30,7 @@ vec4 spectrum_offset( float t ) {
 	return pow( ret, vec4(1.0/2.2) );
 }
 
-const float max_distort = 0.3;
+const float max_distort = 0.1;
 const int num_iter = 12;
 const float reci_num_iter_f = 1.0 / float(num_iter);
 
