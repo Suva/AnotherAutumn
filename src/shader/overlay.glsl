@@ -6,5 +6,5 @@ varying vec2 vUv;
 
 void main()
 {
-	gl_FragColor = texture2D(tInput, vUv) + texture2D(tOverlay, vUv);
+	gl_FragColor = (texture2D(tInput, vUv) + texture2D(tOverlay, vUv) - 0.5) * 1.5 + 0.5;
 }
