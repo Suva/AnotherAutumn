@@ -1,0 +1,40 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', '-g', 'require.js' ]
+2 info using npm@1.4.9
+3 info using node@v0.10.28
+4 verbose node symlink /usr/bin/node
+5 verbose cache add [ 'require.js', null ]
+6 verbose cache add name=undefined spec="require.js" args=["require.js",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'require.js',
+7 verbose parsed url   path: 'require.js',
+7 verbose parsed url   href: 'require.js' }
+8 silly lockFile 3eddd1f1-require-js require.js
+9 verbose lock require.js /home/suva/.npm/3eddd1f1-require-js.lock
+10 silly lockFile 3eddd1f1-require-js require.js
+11 error Error: Attempt to unlock require.js, which hasn't been locked
+11 error     at unlock (/usr/lib/node_modules/npm/lib/cache.js:1434:11)
+11 error     at cb (/usr/lib/node_modules/npm/lib/cache.js:925:5)
+11 error     at /usr/lib/node_modules/npm/lib/cache.js:942:20
+11 error     at /usr/lib/node_modules/npm/lib/cache.js:1420:7
+11 error     at /usr/lib/node_modules/npm/node_modules/lockfile/lockfile.js:167:38
+11 error     at OpenReq.Req.done (/usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:144:5)
+11 error     at OpenReq.done (/usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:64:22)
+11 error     at Object.oncomplete (fs.js:107:15)
+12 error If you need help, you may report this *entire* log,
+12 error including the npm and node versions, at:
+12 error     <http://github.com/npm/npm/issues>
+13 error System Linux 2.6.32-042stab078.28
+14 error command "/usr/bin/node" "/usr/bin/npm" "install" "-g" "require.js"
+15 error cwd /var/www/another_autumn/src
+16 error node -v v0.10.28
+17 error npm -v 1.4.9
+18 verbose exit [ 1, true ]

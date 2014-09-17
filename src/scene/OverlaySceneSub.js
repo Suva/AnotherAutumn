@@ -18,11 +18,11 @@ define(function(require){
     var lightSystem = new THREE.Object3D();
 
     var lightColours = [
-        0xFFFFFF
+        0x666666
     ];
 
     var maxLightDistance = 10;
-    var lightTriggerIntensity = 0.4;
+    var lightTriggerIntensity = 0.6;
 
     var r = Random(2);
     var lights = [];
