@@ -3,6 +3,8 @@ define(function(require){
     var Random = require("Random");
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, 16 / 9, 0.1, 5000);
+    var DustField = require("component/DustField");
+    var Timer = require("Timer");
 
     camera.position.set(0, 0, 10);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -42,16 +44,24 @@ define(function(require){
 
     scene.add(lightSystem);
 
+    var dust = DustField.create(3);
+    scene.add(dust.system);
+
+    var timer = new Timer();
     return {
         scene: scene,
         camera: camera,
         render: function(time){
+            var passed = timer.getPassed(time);
+
             lightSystem.rotation.y = time;
             lightSystem.rotation.z = time;
             lightSystem.rotation.x = time;
             _.each(lights, function(light){
-                light.intensity = Math.max(0, light.intensity - 0.005);
-            })
+                light.intensity = Math.max(0, light.intensity - passed);
+            });
+
+            dust.update(time);
         },
         onEvent: function(event) {
             if(event.instrument == 2){

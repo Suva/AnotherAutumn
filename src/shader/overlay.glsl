@@ -14,5 +14,5 @@ void main()
 			- texture2D(tOverlaySub, vUv)
 			- 0.5
 		)
-		* 1.5 + 0.5;
+		* 1.2 + 0.5;
 }
