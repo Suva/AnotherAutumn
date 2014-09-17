@@ -2,7 +2,8 @@ define(function(require){
     var EffectShader = require("EffectShader");
     var AberrationShader = require("AberrationShader");
     var OverlayShader = require("OverlayShader");
-    var OverlayScene = require("scene/OverlayScene");
+    var OverlaySceneAdd = require("scene/OverlaySceneAdd");
+    var OverlaySceneSub = require("scene/OverlaySceneSub");
 
     var TimeLine = null;
 
@@ -10,7 +11,8 @@ define(function(require){
 
     var renderModel = new THREE.RenderPass();
 
-    var renderTarget = null;
+    var renderTargetAdd = null;
+    var renderTargetSub = null;
 
     var composer = InitializeComposer();
     var frameUrl = null;
@@ -51,7 +53,8 @@ define(function(require){
                 }
 
                 dispatchEvents(events, scene);
-                dispatchEvents(events, OverlayScene);
+                dispatchEvents(events, OverlaySceneAdd);
+                dispatchEvents(events, OverlaySceneSub);
                 scene.render(timeSource.getTime() - switchTime);
 
                 if(!frameUrl)
@@ -60,9 +63,13 @@ define(function(require){
                 renderModel.scene = renderScene;
                 renderModel.camera = scene.camera;
 
-                OverlayScene.render(timeSource.getTime());
-                renderer.render(OverlayScene.scene, OverlayScene.camera, renderTarget);
-                overlayPass.uniforms.tOverlay.value = renderTarget;
+                OverlaySceneAdd.render(timeSource.getTime());
+                OverlaySceneSub.render(timeSource.getTime());
+
+                renderer.render(OverlaySceneAdd.scene, OverlaySceneAdd.camera, renderTargetAdd);
+                renderer.render(OverlaySceneSub.scene, OverlaySceneSub.camera, renderTargetSub);
+                overlayPass.uniforms.tOverlayAdd.value = renderTargetAdd;
+                overlayPass.uniforms.tOverlaySub.value = renderTargetSub;
 
                 effectPass.uniforms.globalBrightness.value = Math.random() * 0.01 + 0.99;
                 composer.render();
@@ -103,7 +110,8 @@ define(function(require){
             scene.sceneObject.camera.updateProjectionMatrix();
         }
 
-        renderTarget = new THREE.WebGLRenderTarget(width, height);
+        renderTargetAdd = new THREE.WebGLRenderTarget(width, height);
+        renderTargetSub = new THREE.WebGLRenderTarget(width, height);
 
         composer.setSize(width, height);
 
@@ -131,7 +139,7 @@ define(function(require){
         composer.addPass(overlayPass);
         composer.addPass(effectBloom);
         composer.addPass(blurPass);
-		composer.addPass(aberrationPass);
+        composer.addPass(aberrationPass);
         composer.addPass(effectVignette);
         composer.addPass(effectPass);
         composer.addPass(effectCopy);

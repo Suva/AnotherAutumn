@@ -4,7 +4,8 @@ define(function(require){
    return {
        uniforms: {
            "tInput": { type: "t", value: null },
-           "tOverlay": { type: "t", value: null },
+           "tOverlayAdd": { type: "t", value: null },
+           "tOverlaySub": { type: "t", value: null },
            "overlayAmount": { type: "f", value: 0}
        },
        fragmentShader: fs,
