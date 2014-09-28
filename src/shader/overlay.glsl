@@ -10,7 +10,7 @@ void main()
 	gl_FragColor = 
 		(
 			texture2D(tInput, vUv) 
-			+ texture2D(tOverlayAdd, vUv) 
+			+ texture2D(tOverlayAdd, vUv)
 			- texture2D(tOverlaySub, vUv)
 			- 0.5
 		)

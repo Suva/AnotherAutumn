@@ -6,17 +6,22 @@ define(function(require){
     var r = RandomNumberGenerator(11);
 
     var geo = new THREE.Geometry();
+    var offLeft = true;
+
+    function getOffScreenPosition() {
+        return new THREE.Vector3(
+            offLeft ? 12 : -12,
+            (r.random() - 0.5) * 12,
+            (r.random() - 0.5) * 12
+        );
+    }
 
     _.each(_.range(1, 20000), function () {
-        var vector;
-        vector = new THREE.Vector3(
-            -10,
-            r.random() * 10,
-            r.random() * 10
-        );
+        var vector = getOffScreenPosition();
 
         vector.speed = 0.8 + r.random() * 0.2;
         vector.destination = vector.clone();
+        vector.assigned = false;
 
         geo.vertices.push(vector);
     });
@@ -37,9 +42,13 @@ define(function(require){
 
     var timer = new Timer();
     return {
-        setTitle: function(titlePbm){
+        setTitle: function(titlePbm, position){
 
             var title = ParsePbm(titlePbm);
+
+            if(position){
+                title.position = position;
+            }
 
             // Assign particle destinations
             var x = 0;
@@ -53,6 +62,7 @@ define(function(require){
                         vertex.destination.x = (title.position.x - (title.width * separation / 2))+ x * separation;
                         vertex.destination.y = (title.position.y + (title.height * separation / 2)) + y * separation;
                         vertex.destination.z  = title.position.z;
+                        vertex.assigned = true;
                     }
                     x++;
                 });
@@ -61,6 +71,15 @@ define(function(require){
             });
 
             // Assign unneeded particles destinations away from screen
+            for(var i = vertNumber; i < particleSystem.geometry.vertices.length; i++){
+                var vertex = particleSystem.geometry.vertices[i];
+                if(vertex.assigned){
+                    vertex.destination = getOffScreenPosition();
+                    vertex.assigned = false;
+                }
+
+            }
+            offLeft = !offLeft;
         },
 
         render: function(time){
@@ -68,7 +87,7 @@ define(function(require){
             _.each(particleSystem.geometry.vertices, function(vert){
                 var direction = vert.destination.clone();
                 direction.sub(vert);
-                if(direction.length() < 0.1) {
+                if(direction.length() < 0.02) {
                     return;
                 }
                 direction.normalize();
@@ -81,6 +100,15 @@ define(function(require){
         },
         getSystem: function(){
             return particleSystem;
+        },
+        clear: function(){
+            for(var i = 0; i < particleSystem.geometry.vertices.length; i++){
+                var vertex = particleSystem.geometry.vertices[i];
+                if(vertex.assigned){
+                    vertex.destination = getOffScreenPosition();
+                    vertex.assigned = false;
+                }
+            }
         }
 
     }
