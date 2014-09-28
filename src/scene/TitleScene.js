@@ -35,7 +35,6 @@ define(function(require){
     var fgPlane = new THREE.Object3D();
 
     _.each(fgTextures, function(texture, idx) {
-        console.log(texture);
         var plane = new THREE.Mesh(
             new THREE.PlaneGeometry(16, 9),
             new THREE.MeshBasicMaterial({

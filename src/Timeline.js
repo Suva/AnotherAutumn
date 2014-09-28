@@ -3,6 +3,7 @@ define(function(require) {
     var CCLogoScene              = require("scene/CCLogoScene");
     var TitleScene               = require("scene/TitleScene");
     var LonelyTreeScene          = require("scene/LonelyTree");
+    var PanoramaScene            = require("scene/PanoramaScene");
 
     var renderScene;
     var renderer = null;
@@ -11,7 +12,8 @@ define(function(require) {
     var allScenes = [
         CCLogoScene,
         TitleScene,
-        LonelyTreeScene
+        LonelyTreeScene,
+        PanoramaScene
     ];
 
     function initRenderScene(scenes){
@@ -54,6 +56,12 @@ define(function(require) {
                     break;
                 case 3:
                     currentScene = TitleScene;
+                    break;
+                case 4:
+                    currentScene = PanoramaScene;
+                    break;
+                case 5:
+                    currentScene = LonelyTreeScene;
 
             }
 

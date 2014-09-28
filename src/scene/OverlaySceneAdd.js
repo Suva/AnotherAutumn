@@ -11,7 +11,7 @@ define(function(require){
 
     var backgroundPlane = new THREE.Mesh(
         new THREE.PlaneGeometry(16, 9, 32, 32),
-        new THREE.MeshLambertMaterial({color: 0xFFFFFF})
+        new THREE.MeshLambertMaterial({color: 0xFFFFFF, transparent: true, opacity: 0.3})
     );
     backgroundPlane.scale.multiplyScalar(4);
     backgroundPlane.position.z = -10;
@@ -38,7 +38,6 @@ define(function(require){
         light.position.y = r.randInt(-maxLightDistance, maxLightDistance);
         light.position.z = r.randInt(-maxLightDistance, maxLightDistance);
         lights.push(light);
-        console.log(light);
         lightSystem.add(light)
     });
 

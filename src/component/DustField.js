@@ -31,8 +31,6 @@ define(function(require){
                 r.random() - 0.5
             );
 
-            console.log(vector);
-
             geo.vertices.push(vector);
             var color = new THREE.Color(0xffffff);
             color.setHSL(r.random(), 0.5, 0.9);
