@@ -4,6 +4,12 @@ define(function(require) {
     var TitleScene               = require("scene/TitleScene");
     var LonelyTreeScene          = require("scene/LonelyTree");
     var PanoramaScene            = require("scene/PanoramaScene");
+    var PhotoZoomer              = require("scene/PhotoZoomer");
+
+    var CobwebScene   = PhotoZoomer("images/cobweb.jpg", 0.1);
+    var LasnamaeScene = PhotoZoomer("images/lasnamae.jpg", 0.1);
+    var GrassScene    = PhotoZoomer("images/grass.jpg", -0.4, 10);
+    var BrickScene    = PhotoZoomer("images/brick.jpg", 0.1);
 
     var renderScene;
     var renderer = null;
@@ -13,7 +19,11 @@ define(function(require) {
         CCLogoScene,
         TitleScene,
         LonelyTreeScene,
-        PanoramaScene
+        PanoramaScene,
+        CobwebScene,
+        LasnamaeScene,
+        GrassScene,
+        BrickScene
     ];
 
     function initRenderScene(scenes){
@@ -62,6 +72,19 @@ define(function(require) {
                     break;
                 case 5:
                     currentScene = LonelyTreeScene;
+                    break;
+                case 6:
+                    currentScene = CobwebScene;
+                    break;
+                case 7:
+                    currentScene = LasnamaeScene;
+                    break;
+                case 8:
+                    currentScene = GrassScene;
+                    break;
+                case 9:
+                    currentScene = BrickScene;
+                    break;
 
             }
 
