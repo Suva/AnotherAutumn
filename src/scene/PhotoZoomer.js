@@ -2,6 +2,8 @@ define(function(require){
     var ImagePlane = require("ImagePlane");
     var Timer = require("Timer");
     var Wiggle = require("Wiggle");
+    var OverlayEffects = require("OverlayEffects");
+
 
     return function(image, speed, initialScale){
         var scene = new THREE.Object3D();
@@ -25,6 +27,9 @@ define(function(require){
                 plane.position.z += passed * speed;
                 wiggle(camera);
                 overlayPass.uniforms.overlayAmount.value = Math.max(overlayPass.uniforms.overlayAmount.value - passed * 2, 0);
+
+                OverlayEffects.moveGlitchers();
+
             },
             onEvent: function(event) {
                 if(event.instrument == 1 && event.note == "D-3"){

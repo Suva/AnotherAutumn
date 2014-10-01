@@ -1,4 +1,6 @@
 define(function(require) {
+    var OverlaySceneAdd          = require("scene/OverlaySceneAdd");
+
     var Renderer                 = require("Renderer");
     var CCLogoScene              = require("scene/CCLogoScene");
     var TitleScene               = require("scene/TitleScene");
@@ -10,6 +12,9 @@ define(function(require) {
     var LasnamaeScene = PhotoZoomer("images/lasnamae.jpg", 0.1);
     var GrassScene    = PhotoZoomer("images/grass.jpg", -0.4, 10);
     var BrickScene    = PhotoZoomer("images/brick.jpg", 0.1);
+    var GasmaskScene  = PhotoZoomer("images/gasmask.jpg", 0.1);
+
+    var MountainScene = PanoramaScene();
 
     var renderScene;
     var renderer = null;
@@ -19,11 +24,12 @@ define(function(require) {
         CCLogoScene,
         TitleScene,
         LonelyTreeScene,
-        PanoramaScene,
+        MountainScene,
         CobwebScene,
         LasnamaeScene,
         GrassScene,
-        BrickScene
+        BrickScene,
+        GasmaskScene
     ];
 
     function initRenderScene(scenes){
@@ -68,7 +74,7 @@ define(function(require) {
                     currentScene = TitleScene;
                     break;
                 case 4:
-                    currentScene = PanoramaScene;
+                    currentScene = MountainScene;
                     break;
                 case 5:
                     currentScene = LonelyTreeScene;
@@ -85,12 +91,17 @@ define(function(require) {
                 case 9:
                     currentScene = BrickScene;
                     break;
+                case 10:
+                    currentScene = MountainScene;
+                    break;
+
 
             }
 
             renderScene = renderScenes[getSceneId(currentScene)];
 
             if(oldScene != currentScene){
+                OverlaySceneAdd.enableFloaters();
                 if(currentScene.init){
                     currentScene.init({renderScene: renderScene, renderer: renderer});
                 }

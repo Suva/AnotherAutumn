@@ -73,6 +73,12 @@ define(function(require){
         },
         init: function(args){
 
+        },
+        disableFloaters: function(){
+            dust.system.position.z = 50;
+        },
+        enableFloaters: function(){
+            dust.system.position.z = 0;
         }
     };
 });
