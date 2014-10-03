@@ -8,6 +8,7 @@ define(function(require) {
     var PanoramaScene            = require("scene/PanoramaScene");
     var PhotoZoomer              = require("scene/PhotoZoomer");
     var CleanPanorama            = require("scene/CleanPanorama");
+    var SaintsScene              = require("scene/SaintsScene");
 
     var CobwebScene   = PhotoZoomer("images/cobweb.jpg", 0.1);
     var LasnamaeScene = PhotoZoomer("images/lasnamae.jpg", 0.1);
@@ -32,7 +33,8 @@ define(function(require) {
         GrassScene,
         PlaneScene,
         GasmaskScene,
-        RiverPanorama
+        RiverPanorama,
+        SaintsScene
     ];
 
     function initRenderScene(scenes){
@@ -99,6 +101,9 @@ define(function(require) {
                     break;
                 case 11:
                     currentScene = RiverPanorama;
+                    break;
+                case 12:
+                    currentScene = SaintsScene
                     break;
 
             }

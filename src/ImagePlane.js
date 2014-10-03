@@ -7,14 +7,13 @@ define(function(){
 
         var tex = THREE.ImageUtils.loadTexture(imageUrl, null, function(tex){
             mesh.scale.x = tex.image.width / tex.image.height;
-
-
         });
 
         var mesh = new THREE.Mesh(
             geo,
             new THREE.MeshBasicMaterial({
-                map: tex
+                map: tex,
+                transparent: true
             })
         );
 
