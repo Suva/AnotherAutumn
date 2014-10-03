@@ -7,14 +7,16 @@ define(function(require) {
     var LonelyTreeScene          = require("scene/LonelyTree");
     var PanoramaScene            = require("scene/PanoramaScene");
     var PhotoZoomer              = require("scene/PhotoZoomer");
+    var CleanPanorama            = require("scene/CleanPanorama");
 
     var CobwebScene   = PhotoZoomer("images/cobweb.jpg", 0.1);
     var LasnamaeScene = PhotoZoomer("images/lasnamae.jpg", 0.1);
     var GrassScene    = PhotoZoomer("images/grass.jpg", -0.4, 10);
-    var BrickScene    = PhotoZoomer("images/brick.jpg", 0.1);
+    var PlaneScene    = PhotoZoomer("images/plane.jpg", 0.1);
     var GasmaskScene  = PhotoZoomer("images/gasmask.jpg", 0.1);
 
-    var MountainScene = PanoramaScene();
+    var MountainScene = PanoramaScene("models/rummu_panorama.jpg");
+    var RiverPanorama = CleanPanorama("images/river-panorama.jpg");
 
     var renderScene;
     var renderer = null;
@@ -28,8 +30,9 @@ define(function(require) {
         CobwebScene,
         LasnamaeScene,
         GrassScene,
-        BrickScene,
-        GasmaskScene
+        PlaneScene,
+        GasmaskScene,
+        RiverPanorama
     ];
 
     function initRenderScene(scenes){
@@ -89,12 +92,14 @@ define(function(require) {
                     currentScene = GrassScene;
                     break;
                 case 9:
-                    currentScene = BrickScene;
+                    currentScene = GasmaskScene;
                     break;
                 case 10:
-                    currentScene = MountainScene;
+                    currentScene = PlaneScene;
                     break;
-
+                case 11:
+                    currentScene = RiverPanorama;
+                    break;
 
             }
 

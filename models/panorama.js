@@ -27,7 +27,6 @@
 		"colorSpecular" : [1, 1, 1],
 		"depthTest" : true,
 		"depthWrite" : true,
-		"mapDiffuse" : "rummu_panorama.jpg",
 		"mapDiffuseWrap" : ["repeat", "repeat"],
 		"shading" : "Basic",
 		"specularCoef" : 50,
