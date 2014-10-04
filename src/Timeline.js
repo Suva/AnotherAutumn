@@ -25,7 +25,7 @@ define(function(require) {
 
     var GasmaskScene  = PhotoZoomer("images/gasmask.jpg", 0.1);
     var MountainScene = PanoramaScene("models/rummu_panorama.jpg");
-    var RiverPanorama = CleanPanorama("images/river-panorama.jpg");
+    var BudaPanorama = CleanPanorama("images/buda-panorama.jpg");
 
     var renderScene;
     var renderer = null;
@@ -41,7 +41,7 @@ define(function(require) {
         GrassScene,
         PlaneScene,
         GasmaskScene,
-        RiverPanorama,
+        BudaPanorama,
         SaintsScene,
         LanternScene,
         PostScene,
@@ -114,7 +114,7 @@ define(function(require) {
                     currentScene = PlaneScene;
                     break;
                 case 11:
-                    currentScene = RiverPanorama;
+                    currentScene = BudaPanorama;
                     break;
                 case 12:
                     currentScene = SaintsScene;

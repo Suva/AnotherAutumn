@@ -27,7 +27,7 @@ define(function(require){
         });
 
         var timer = new Timer();
-        var wiggle = Wiggle(0.5, 0.005);
+        var wiggle = Wiggle(0.2, 0.001);
         return {
             scene: scene,
             camera: camera,
