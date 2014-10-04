@@ -9,22 +9,23 @@ define(function(require){
     camera.position.set(0, 0, 5);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-    var sky = ImagePlane("images/saints-sky.jpg", 15);
-    var fg = ImagePlane("images/saints-fg.png");
-
-    sky.position.z = -10;
-
-    scene.add(sky);
-    scene.add(fg);
+    var plane = ImagePlane("images/sunset.jpg");
+    scene.add(plane);
 
     var wiggle = Wiggle(0.3, 0.001);
 
     return {
-        scene: scene,
-        camera: camera,
         render: function(time){
             wiggle(camera);
+            var fadeOutTime = 12;
+            if(time > fadeOutTime) {
+                blurPass.uniforms.delta.value.x = (time - fadeOutTime) * 0.005;
+                blurPass.uniforms.delta.value.y = (time - fadeOutTime) * 0.005;
+                effectPass.uniforms.brightness.value = Math.max(0 - (time - fadeOutTime) * 0.1, -1);
+            }
         },
+        scene: scene,
+        camera: camera,
         onEvent: function(event) {
 
         },

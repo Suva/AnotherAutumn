@@ -6,6 +6,7 @@ define(function(require){
     var bdTitle = require("text!titles/browser-demo.pbm");
     var musicTitle = require("text!titles/music.pbm");
     var photoTitle = require("text!titles/photo.pbm");
+    var endTitle = require("text!titles/fun.pbm");
 
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, 16 / 9, 0.1, 5000);
@@ -50,6 +51,9 @@ define(function(require){
                         break;
                     case 6:
                         Title.clear();
+                        break;
+                    case 18:
+                        Title.setTitle(endTitle);
                         break;
                     default:
                 }

@@ -8,14 +8,22 @@ define(function(require) {
     var PanoramaScene            = require("scene/PanoramaScene");
     var PhotoZoomer              = require("scene/PhotoZoomer");
     var CleanPanorama            = require("scene/CleanPanorama");
-    var SaintsScene              = require("scene/SaintsScene");
+    var GreetScene               = require("scene/GreetScene");
+    var EndScene                 = require("scene/EndScene");
+
+    var SaintsScene              = GreetScene("images/saints-fg.png", "images/saints-sky.jpg", "images/greets/Conspiracy.png");
+    var LanternScene             = GreetScene("images/lantern-fg.png", "images/lantern-sky.jpg", "images/greets/Farbrausch.png");
+    var PostScene                = GreetScene("images/post-fg.png", "images/post-bg.jpg", "images/greets/Rebels.png");
+    var Post2Scene               = GreetScene("images/post2-fg.png", "images/post2-bg.jpg", "images/greets/Brainstorm.png");
+    var EdgeScene                = GreetScene("images/edge-fg.png", "images/edge-bg.jpg", "images/greets/Darklite.png");
+    var HydrantScene             = GreetScene("images/hydrant-fg.png", "images/hydrant-bg.jpg", "images/greets/Renoise.png");
 
     var CobwebScene   = PhotoZoomer("images/cobweb.jpg", 0.1);
     var LasnamaeScene = PhotoZoomer("images/lasnamae.jpg", 0.1);
     var GrassScene    = PhotoZoomer("images/grass.jpg", -0.4, 10);
     var PlaneScene    = PhotoZoomer("images/plane.jpg", 0.1);
-    var GasmaskScene  = PhotoZoomer("images/gasmask.jpg", 0.1);
 
+    var GasmaskScene  = PhotoZoomer("images/gasmask.jpg", 0.1);
     var MountainScene = PanoramaScene("models/rummu_panorama.jpg");
     var RiverPanorama = CleanPanorama("images/river-panorama.jpg");
 
@@ -34,7 +42,13 @@ define(function(require) {
         PlaneScene,
         GasmaskScene,
         RiverPanorama,
-        SaintsScene
+        SaintsScene,
+        LanternScene,
+        PostScene,
+        Post2Scene,
+        EdgeScene,
+        HydrantScene,
+        EndScene
     ];
 
     function initRenderScene(scenes){
@@ -103,9 +117,26 @@ define(function(require) {
                     currentScene = RiverPanorama;
                     break;
                 case 12:
-                    currentScene = SaintsScene
+                    currentScene = SaintsScene;
                     break;
-
+                case 13:
+                    currentScene = LanternScene;
+                    break;
+                case 14:
+                    currentScene = PostScene;
+                    break;
+                case 15:
+                    currentScene = Post2Scene;
+                    break;
+                case 16:
+                    currentScene = EdgeScene;
+                    break;
+                case 17:
+                    currentScene = HydrantScene;
+                    break;
+                case 18:
+                    currentScene = EndScene;
+                    break;
             }
 
             renderScene = renderScenes[getSceneId(currentScene)];

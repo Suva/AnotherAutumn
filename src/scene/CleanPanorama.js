@@ -2,6 +2,7 @@ define(function(require){
 
     var OverlayEffects = require("OverlayEffects");
     var OverlaySceneAdd = require("scene/OverlaySceneAdd");
+    var Wiggle = require("Wiggle");
 
     return function(imageUrl, initRotation, rotationSpeed) {
         var Timer = require("Timer");
@@ -26,6 +27,7 @@ define(function(require){
         });
 
         var timer = new Timer();
+        var wiggle = Wiggle(0.5, 0.005);
         return {
             scene: scene,
             camera: camera,
@@ -33,9 +35,13 @@ define(function(require){
                 var passed = timer.getPassed(time);
                 camera.rotation.x += passed * (rotationSpeed?rotationSpeed.x:0.005);
                 camera.rotation.y -= passed * (rotationSpeed?rotationSpeed.y:0.15);
+                wiggle(camera);
+                overlayPass.uniforms.overlayAmount.value = Math.max(overlayPass.uniforms.overlayAmount.value - passed * 2, 0);
             },
             onEvent: function(event) {
-
+                if(event.instrument == 1 && event.note == "D-3"){
+                    overlayPass.uniforms.overlayAmount.value = 1;
+                }
             },
             init: function(args){
                 OverlayEffects.resetGlitchers();
