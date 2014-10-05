@@ -92,7 +92,13 @@ define(function(require){
                 }
                 direction.normalize();
                 direction.multiplyScalar(vert.speed * passed * 4);
-                vert.add(direction);
+                if(direction.length() >  vert.distanceTo(vert.destination)){
+                    vert.x = vert.destination.x;
+                    vert.y = vert.destination.y;
+                    vert.z = vert.destination.z;
+                } else {
+                    vert.add(direction);
+                }
             });
 
 
